@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Controle Oficina</title>
+  </head>
+  <body>
+    <!--LOGIN-->
+    <section id="login-tela" class="esconder">
+      <h1>Fazer Login</h1>
+      <div id="login-form">
+        <div class="inputs-login">
+          <label for="email">Email:</label>
+          <input type="email" id="email" />
+        </div>
+        <div class="inputs-login">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" />
+        </div>
+
+        <div id="botoes-login">
+          <button id="login-botao">Entrar</button>
+        </div>
+      </div>
+    </section>
+
+    <!--MAIN-->
+    <section id="controle-tela" class="mostrar">
+      <header id="cabecalho-controle">
+        <div id="area-pesquisa">
+          <label for="pesquisa">Pesquisar Item:</label>
+          <input type="text" id="pesquisa" />
+        </div>
+
+        <div id="area-logout">
+          <button id="logout-botao">Sair</button>
+        </div>
+      </header>
+
+      <div id="area-adicionar">
+        <h2>Adicionar Item:</h2>
+        <div class="inputs-adicionar">
+          <label for="item-nome">Nome do item:</label>
+          <input type="text" id="item-nome" />
+        </div>
+        <div class="inputs-adicionar">
+          <label for="item-nome">Data:</label>
+          <input type="date" id="item-data" />
+        </div>
+
+        <button id="botao-adicionar">Adicionar</button>
+      </div>
+
+      <div id="area-lista">
+        <ul id="lista-itens"></ul>
+      </div>
+    </section>
+
+    <!--SCRIPT-->
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
