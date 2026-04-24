@@ -8,8 +8,8 @@
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   background: linear-gradient(to top, black, rgb(31, 31, 31));
 
   display: flex;
@@ -96,7 +96,7 @@ body {
 
 /*MAIN*/
 #controle-tela {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background: linear-gradient(
     to bottom,
@@ -137,7 +137,7 @@ body {
 #pesquisa {
   border: 1px solid rgb(40, 38, 163);
   height: 30px;
-  width: 800px;
+  max-width: 800px;
   flex: 1;
   border-radius: 7px 0px 7px 0px;
 }
@@ -182,7 +182,8 @@ body {
 }
 
 .inputs-adicionar {
-  width: 25vw;
+  width: 100%;
+  max-width: 400px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -227,18 +228,62 @@ body {
 
 /* LISTA */
 #area-lista {
-  min-height: 80vh;
-  width: 100vw;
+  margin-top: 10vh;
+  width: 100%;
+  max-width: 1200px;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+
+  border: 3px solid black;
+  padding: 2px;
 }
 
-#lista-itens {
-  list-style: none;
-  display: flex;
+#cabecalho-lista {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 120px;
+  gap: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#lista-itens li {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr 120px;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 20px;
+
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.nome {
+  text-align: left;
+}
+
+.data {
+  text-align: left;
+}
+
+.remover {
+  height: 30px;
+  width: 90px;
+
+  font-size: 15px;
+  background-color: white;
+
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.remover:hover {
+  background-color: rgb(46, 44, 190);
+  color: white;
+  box-shadow: 5px 5px 20px rgb(0, 0, 0);
+  transform: scale(108%);
 }
 
 /*MOSTRAR/ESCONDER*/

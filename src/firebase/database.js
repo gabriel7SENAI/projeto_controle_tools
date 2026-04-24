@@ -17,22 +17,12 @@ export async function adicionarItem(nome, data) {
   });
 }
 
-onValue(referencia, (snapshot) => {
-  const lista = document.getElementById("lista-itens");
-  lista.innerHTML = "";
-
-  if (!snapshot.exists()) return;
-
-  snapshot.forEach((child) => {
-    const item = child.val();
-    const id = child.key;
-
-    const li = document.createElement("li");
-
-    const dataFormatada = new Date(item.data).toLocaleDateString("pt-BR");
-
-    li.textContent = `${item.nome} - ${dataFormatada}`;
-
-    lista.appendChild(li);
+export async function lerItens(callback) {
+  onValue(referencia, (snapshot) => {
+    callback(snapshot);
   });
-});
+}
+
+export async function removerItem(id) {
+  remove(ref(database, "itens/" + id));
+}

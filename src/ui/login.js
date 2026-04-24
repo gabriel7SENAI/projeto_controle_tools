@@ -25,6 +25,7 @@ async function fazerLogin() {
   try {
     await login(email, senha);
     console.log("Login OK");
+    location.reload();
     return;
   } catch (err) {
     console.log(err.code);

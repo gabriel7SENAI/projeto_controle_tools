@@ -1,5 +1,5 @@
 import { observarAuth } from "./firebase/auth.js";
-import { adicionarItem } from "./firebase/database.js";
+import { renderizar } from "./ui/lista.js";
 
 import "./ui/login.js";
 import "./ui/lista.js";
@@ -7,25 +7,34 @@ import "./ui/lista.js";
 const telaLogin = document.getElementById("login-tela");
 const telaControle = document.getElementById("controle-tela");
 
-// observarAuth(async (user) => {
-//   if (user) {
-//     console.log("Logado:", user.uid);
+window.isAdmin = false;
 
-//     const token = await user.getIdTokenResult(true);
+observarAuth(async (user) => {
+  if (user) {
+    console.log("Logado:", user.uid);
 
-//     if (token.claims.role === "admin") {
-//       console.log("É admin");
-//     }
-//     telaLogin.classList.remove("mostrar");
-//     telaLogin.classList.add("esconder");
-//     telaControle.classList.remove("esconder");
-//     telaControle.classList.add("mostrar");
-//   } else {
-//     telaLogin.classList.remove("esconder");
-//     telaLogin.classList.add("mostrar");
-//     telaControle.classList.remove("mostrar");
-//     telaControle.classList.add("esconder");
+    const token = await user.getIdTokenResult();
+    const isAdmin = token.claims.role === "admin";
 
-//     console.log("Nenhum usuário logado");
-//   }
-// });
+    window.isAdmin = isAdmin;
+    renderizar();
+
+    telaLogin.classList.remove("mostrar");
+    telaLogin.classList.add("esconder");
+    telaControle.classList.remove("esconder");
+    telaControle.classList.add("mostrar");
+
+    if (!isAdmin) {
+      console.log("Usuário comum");
+    } else {
+      console.log("É admin");
+    }
+  } else {
+    telaLogin.classList.remove("esconder");
+    telaLogin.classList.add("mostrar");
+    telaControle.classList.remove("mostrar");
+    telaControle.classList.add("esconder");
+
+    console.log("Nenhum usuário logado");
+  }
+});

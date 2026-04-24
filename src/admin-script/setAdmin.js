@@ -5,7 +5,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-async function setAdmin() {
+export async function setAdmin() {
   const uid = "l9QN7eaBDqgXmwlOp9FfWImWgAU2";
 
   await admin.auth().setCustomUserClaims(uid, {
