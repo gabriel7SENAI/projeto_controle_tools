@@ -11,8 +11,6 @@ window.isAdmin = false;
 
 observarAuth(async (user) => {
   if (user) {
-    console.log("Logado:", user.uid);
-
     const token = await user.getIdTokenResult();
     const isAdmin = token.claims.role === "admin";
 
@@ -23,18 +21,10 @@ observarAuth(async (user) => {
     telaLogin.classList.add("esconder");
     telaControle.classList.remove("esconder");
     telaControle.classList.add("mostrar");
-
-    if (!isAdmin) {
-      console.log("Usuário comum");
-    } else {
-      console.log("É admin");
-    }
   } else {
     telaLogin.classList.remove("esconder");
     telaLogin.classList.add("mostrar");
     telaControle.classList.remove("mostrar");
     telaControle.classList.add("esconder");
-
-    console.log("Nenhum usuário logado");
   }
 });

@@ -3,7 +3,6 @@ import { adicionarItem, lerItens, removerItem } from "../firebase/database.js";
 const listaItens = document.getElementById("lista-itens");
 const botaoAdicionar = document.getElementById("botao-adicionar");
 let itemNome = document.getElementById("item-nome");
-let itemData = document.getElementById("item-data");
 let pesquisarItem = document.getElementById("pesquisa");
 
 let dados = [];
@@ -13,24 +12,31 @@ pesquisarItem.addEventListener("input", () => {
   textoPesquisa = pesquisarItem.value.toLowerCase();
   renderizar();
 });
+
 botaoAdicionar.addEventListener("click", () => {
-  let nome = itemNome.value;
-  let data = itemData.value;
+  if (window.isAdmin) {
+    let nome = itemNome.value.trim();
+    let data = Date.now();
 
-  adicionarItem(nome, data);
-  alert(`item ${nome} adicionado.`);
+    if (!nome || !data) {
+      alert("insira todos dados");
+      return;
+    }
+    adicionarItem(nome);
+    alert(`item ${nome} adicionado.`);
 
-  console.log("item adicionado");
-
-  itemNome.value = "";
-  itemData.value = "";
+    itemNome.value = "";
+  } else {
+    alert("apenas admins podem adicionar itens à lista");
+  }
 });
 
 lerItens((snapshot) => {
   dados = [];
 
   if (!snapshot.exists()) {
-    listaItens.innerHTML = "";
+    dados = [];
+    renderizar();
     return;
   }
 
@@ -40,6 +46,7 @@ lerItens((snapshot) => {
       id: child.key,
     });
   });
+  renderizar();
 });
 
 export function renderizar() {
@@ -47,11 +54,6 @@ export function renderizar() {
 
   dados.forEach(({ item, id }) => {
     if (!item.nome || !item.nome.toLowerCase().includes(textoPesquisa)) return;
-
-    const dataFormatada =
-      typeof item.data === "string"
-        ? item.data.split("-").reverse().join("/")
-        : "Sem data";
 
     const li = document.createElement("li");
 
@@ -61,7 +63,7 @@ export function renderizar() {
 
     const spanData = document.createElement("span");
     spanData.className = "data";
-    spanData.textContent = dataFormatada;
+    spanData.textContent = new Date(item.data).toLocaleString();
 
     let btnRemover = null;
 

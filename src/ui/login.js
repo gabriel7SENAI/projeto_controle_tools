@@ -2,15 +2,12 @@ import { login, cadastrar, logout } from "../firebase/auth.js";
 
 const botaoLogin = document.getElementById("login-botao");
 const botaoLogout = document.getElementById("logout-botao");
-
 const inputEmail = document.getElementById("email");
 const inputSenha = document.getElementById("senha");
 
 botaoLogin.addEventListener("click", fazerLogin);
 botaoLogout.addEventListener("click", async () => {
   await logout();
-
-  console.log("Usuário deslogado");
 });
 
 async function fazerLogin() {
@@ -24,20 +21,25 @@ async function fazerLogin() {
 
   try {
     await login(email, senha);
-    console.log("Login OK");
     location.reload();
-    return;
   } catch (err) {
     console.log(err.code);
 
-    const resposta = confirm("Usuário não encontrado. Deseja cadastrar?");
-    if (!resposta) return;
+    if (
+      err.code === "auth/user-not-found" ||
+      err.code === "auth/invalid-credential"
+    ) {
+      const resposta = confirm("Usuário não encontrado. Deseja cadastrar?");
+      if (!resposta) return;
 
-    try {
-      await cadastrar(email, senha);
-      alert("Usuário cadastrado com sucesso.");
-    } catch (e) {
-      alert(`Erro ao criar conta: ${e.message}`);
+      try {
+        await cadastrar(email, senha);
+        alert("Usuário cadastrado com sucesso.");
+      } catch (e) {
+        alert(`Erro ao criar conta: ${e.message}`);
+      }
+    } else {
+      alert("Erro ao fazer login: " + err.message);
     }
   } finally {
     inputEmail.value = "";

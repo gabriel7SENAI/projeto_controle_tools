@@ -13,7 +13,6 @@ export async function setAdmin() {
   });
 
   const user = await admin.auth().getUser(uid);
-  console.log("Claims:", user.customClaims);
 }
 
 setAdmin();

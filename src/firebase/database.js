@@ -10,10 +10,10 @@ import {
 
 const referencia = ref(database, "itens");
 
-export async function adicionarItem(nome, data) {
+export async function adicionarItem(nome) {
   push(referencia, {
     nome: nome,
-    data: data,
+    data: Date.now(),
   });
 }
 

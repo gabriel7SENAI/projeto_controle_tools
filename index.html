@@ -9,7 +9,7 @@
   <body>
     <!--LOGIN-->
     <section id="login-tela" class="esconder">
-      <h1>Fazer Login</h1>
+      <h1>Fazer Login / Cadastro</h1>
       <div id="login-form">
         <div class="inputs-login">
           <label for="email">Email:</label>
@@ -28,6 +28,9 @@
 
     <!--MAIN-->
     <section id="controle-tela" class="mostrar">
+      <div id="titulo-controle">
+        <h1>Controle</h1>
+      </div>
       <header id="cabecalho-controle">
         <div id="area-pesquisa">
           <label for="pesquisa">Pesquisar Item:</label>
@@ -45,10 +48,6 @@
           <label for="item-nome">Nome do item:</label>
           <input type="text" id="item-nome" />
         </div>
-        <div class="inputs-adicionar">
-          <label for="item-nome">Data:</label>
-          <input type="date" id="item-data" />
-        </div>
 
         <button id="botao-adicionar">Adicionar</button>
       </div>
@@ -56,7 +55,7 @@
       <div id="area-lista">
         <div id="cabecalho-lista">
           <span>Nome</span>
-          <span>Data</span>
+          <span>Data de publicação</span>
           <span></span>
         </div>
         <ul id="lista-itens"></ul>
